@@ -1,224 +1,667 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S6 ARCHIVAL // Darkroom Inspection Table</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <title>S6 Photograph | Commercial Visual Art</title>
+    
+    <!-- Google Fonts: Luxury Serif + Modern Sans + Luxury Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-dark: #080A08;
+            --bg-card: #0F120F;
+            --forest-deep: #121A13;
+            --gold-accent: #C5A059;
+            --gold-light: #E6D5B8;
+            --text-main: #F4F4F4;
+            --text-muted: #8E928E;
+            --border-color: rgba(197, 160, 89, 0.2);
+            
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-arabic: 'Alexandria', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #050505;
-            color: #f4f4f5;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            letter-spacing: 0.03em;
             overflow-x: hidden;
-        }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
-        /* Subtle Grid Pattern overlaying darkroom background */
-        .darkroom-grid {
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Glassmorphic Dark Card */
-        .card-glass {
-            background: rgba(15, 15, 18, 0.65);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        [dir="rtl"] {
+            font-family: var(--font-arabic), var(--font-body);
+            letter-spacing: 0;
         }
 
-        .card-glass:hover {
-            border-color: rgba(251, 191, 36, 0.35);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(245, 158, 11, 0.1);
-        }
-
-        /* Inspection Magnifier Lens Glass */
-        #loupe {
-            pointer-events: none;
+        /* HEADER */
+        header {
             position: fixed;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 1px solid rgba(251, 191, 36, 0.6);
-            box-shadow: 0 0 0 10000px rgba(5, 5, 5, 0.35), 0 10px 25px rgba(0,0,0,0.8), inset 0 0 15px rgba(255,255,255,0.2);
-            background-repeat: no-repeat;
-            display: none;
-            z-index: 100;
-            transform: translate(-50%, -50%);
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 8%;
+            background: rgba(8, 10, 8, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            color: var(--gold-accent);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 400;
+            transition: color 0.4s ease;
+            opacity: 0.85;
+        }
+
+        nav a:hover {
+            color: var(--gold-accent);
+            opacity: 1;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-accent);
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--gold-accent);
+            color: var(--bg-dark);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 95vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 160px 8% 80px;
+            background: radial-gradient(circle at 50% 30%, var(--forest-deep) 0%, var(--bg-dark) 70%);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 3.8rem;
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: 0.05em;
+            color: #FFFFFF;
+            margin-bottom: 25px;
+            max-width: 900px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            max-width: 700px;
+            margin-bottom: 45px;
+            line-height: 1.8;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 14px 40px;
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-accent);
+            text-decoration: none;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 400;
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-accent);
+            color: var(--bg-dark);
+            box-shadow: 0 0 25px rgba(197, 160, 89, 0.3);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 110px 8%;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.08);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: var(--gold-accent);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            letter-spacing: 0.06em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* PILLARS */
+        .grid-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            transition: border-color 0.4s ease;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--gold-accent);
+        }
+
+        .pillar-card p {
+            color: var(--text-main);
+            font-size: 0.88rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* SERVICES */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            position: relative;
+        }
+
+        .service-num {
+            font-family: var(--font-display);
+            color: var(--gold-accent);
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* COMMISSION FORM */
+        .form-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold-light);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            background: #080A08;
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            color: var(--text-main);
+            font-size: 0.88rem;
+            font-family: inherit;
+            letter-spacing: 0.04em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+        }
+
+        /* Scope Selection Buttons */
+        .scope-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .scope-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #080A08;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 14px 16px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .scope-btn input {
+            accent-color: var(--gold-accent);
+        }
+
+        .scope-btn:hover {
+            border-color: var(--gold-accent);
+            color: var(--text-main);
+        }
+
+        /* Communication Options */
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .radio-label input {
+            accent-color: var(--gold-accent);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-accent);
+            font-family: var(--font-body);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold-accent);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 8%;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
         }
     </style>
 </head>
-<body class="darkroom-grid min-h-screen antialiased selection:bg-amber-500/20 selection:text-amber-200 p-6 lg:p-12">
+<body>
 
-    <!-- Interactive Loupe Element -->
-    <div id="loupe"></div>
-
-    <!-- Header Control Bar -->
-    <header class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-zinc-900 mb-12">
-        <div>
-            <div class="flex items-center gap-3 mb-1">
-                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                <span class="text-[10px] font-mono tracking-[0.3em] text-amber-400/90 uppercase">INSPECTION MODE // LIGHT-TABLE 01</span>
-            </div>
-            <h1 class="text-2xl font-light text-zinc-100">Curated Commercial Works</h1>
-        </div>
-
-        <div class="flex items-center gap-6 text-xs font-mono text-zinc-400">
-            <span class="hidden sm:inline-block text-zinc-600">// HOVER TILES TO ENGAGE LOUPE MAGNIFIER</span>
-            <div class="flex bg-zinc-900/80 p-1 rounded-lg border border-zinc-800">
-                <button onclick="setGrid(3)" id="btn-grid-3" class="px-3 py-1.5 rounded bg-zinc-800 text-amber-300 transition-all">3 COL</button>
-                <button onclick="setGrid(2)" id="btn-grid-2" class="px-3 py-1.5 rounded hover:text-white transition-all">2 COL</button>
-            </div>
-        </div>
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="logo">S6 Photograph</a>
+        <nav>
+            <a href="#about" id="nav-about">About</a>
+            <a href="#services" id="nav-services">Services</a>
+            <a href="#commission" id="nav-commission">Commission</a>
+            <button class="lang-btn" onclick="toggleLanguage()" id="lang-btn">العربية</button>
+        </nav>
     </header>
 
-    <!-- Light-Table Portfolio Canvas -->
-    <main id="portfolio-container" class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 id="hero-title">Pioneering Commercial Visual Craft in Buraidah</h1>
+        <p id="hero-sub">Built on quiet mastery, spatial discipline, and responsible quality ethics. Color-matched, multi-resolution asset delivery tailored specifically for print, digital web, and billboard standards.</p>
+        <a href="#commission" class="btn-primary" id="hero-btn">Initiate a Commission</a>
+    </section>
 
-        <!-- Item 01 -->
-        <article class="card-glass rounded-2xl overflow-hidden p-4 group relative cursor-crosshair"
-                 data-inspect-src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1800&q=90">
+    <!-- Trusted / Values Section -->
+    <section id="about">
+        <div class="section-header">
+            <h2 id="about-heading">Trusted by Brands</h2>
+            <p id="about-sub">Proudly based in Buraidah, serving visionaries and brands across the region with distinction and care.</p>
+        </div>
+        <div class="grid-pillars">
+            <div class="pillar-card">
+                <p id="pillar-1">Proudly rooted in Buraidah, setting an elevated benchmark for commercial visual art and empowering local brands to shine at global standards.</p>
+            </div>
+            <div class="pillar-card">
+                <p id="pillar-2">Honoring every client, product, and space with dedicated attention to detail, visual integrity, and true professionalism.</p>
+            </div>
+            <div class="pillar-card">
+                <p id="pillar-3">Dedicated to capturing regional stories with authenticity, depth, and uncompromising visual standards.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-header">
+            <h2 id="services-heading">Services & Practice</h2>
+            <p id="services-sub">Multi-resolution asset delivery tailored specifically for print, digital web, and billboard standards.</p>
+        </div>
+        <div class="services-grid">
             
-            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-zinc-950 relative border border-zinc-900">
-                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" 
-                     alt="Perfume" class="port-img w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+            <div class="service-card">
+                <div class="service-num">01</div>
+                <h3 id="srv1-title">Visual Strategy & Pre-Visualization</h3>
+                <p id="srv1-desc">Detailed consultation, lighting plans, and moodboards to align expectations before a single frame is shot.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-num">02</div>
+                <h3 id="srv2-title">Discreet Protocols & Data Security</h3>
+                <p id="srv2-desc">Strict Non-Disclosure Agreements (NDAs), encrypted asset management, and closed-set protocols designed to protect unreleased products, private estates, and executive privacy throughout production.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-num">03</div>
+                <h3 id="srv3-title">Asset Architecture & Multi-Medium Mapping</h3>
+                <p id="srv3-desc">Pre-mapping every frame to its final destination—from large-scale outdoor billboards and luxury print to private investor decks—ensuring maximum utility and zero wasted executive time on set.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Commission Form Section -->
+    <section id="commission">
+        <div class="section-header">
+            <h2 id="comm-heading">Initiate a Commission</h2>
+            <p id="comm-sub">Available for commercial commissions, brand launches, and architectural documentation in Buraidah and across the GCC.</p>
+        </div>
+
+        <div class="form-container">
+            <form onsubmit="event.preventDefault(); alert('Inquiry sent successfully!');">
                 
-                <!-- Corner Technical Markings -->
-                <div class="absolute top-3 left-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-zinc-400">
-                    SERIES: 001 // OUD
+                <!-- 1. Name & Organization -->
+                <div class="form-group">
+                    <label id="lbl-name">1. Full Name & Brand / Organization</label>
+                    <input type="text" class="form-control" placeholder="E.g., Abdullah Al-Mansour | S6 Media" required>
                 </div>
-                <div class="absolute bottom-3 right-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-amber-300/90">
-                    MAG 2.0X AVAILABLE
-                </div>
-            </div>
 
-            <div class="mt-4 space-y-2 px-1">
-                <div class="flex items-center justify-between text-xs">
-                    <span class="font-mono text-zinc-500 text-[10px]">CLIENT: ESTKNAN PERFUMES</span>
-                    <span class="font-mono text-amber-400/80 text-[10px]">REF: #8820</span>
+                <!-- 2. Contact Number -->
+                <div class="form-group">
+                    <label id="lbl-phone">2. Contact Number</label>
+                    <input type="tel" class="form-control" placeholder="+966 5X XXX XXXX" required>
                 </div>
-                <h3 class="text-base font-light text-zinc-100 group-hover:text-amber-200 transition-colors">Obsidian Glass Refraction Study</h3>
-                <p class="text-xs font-mono text-zinc-400 border-t border-zinc-900 pt-2 flex justify-between">
-                    <span>LIGHT: 3200K DIFFUSED</span>
-                    <span>BURAIDAH</span>
-                </p>
-            </div>
-        </article>
 
-        <!-- Item 02 -->
-        <article class="card-glass rounded-2xl overflow-hidden p-4 group relative cursor-crosshair"
-                 data-inspect-src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=90">
-            
-            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-zinc-950 relative border border-zinc-900">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" 
-                     alt="Architecture" class="port-img w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
-                
-                <div class="absolute top-3 left-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-zinc-400">
-                    ARCHITECTURAL // SPATIAL
+                <!-- 3. Project Scope -->
+                <div class="form-group">
+                    <label id="lbl-scope">3. Select Project Scope</label>
+                    <div class="scope-options">
+                        <label class="scope-btn">
+                            <input type="checkbox" name="scope" value="commercial">
+                            <span id="scope-1">Commercial & Product Still Life</span>
+                        </label>
+                        <label class="scope-btn">
+                            <input type="checkbox" name="scope" value="architectural">
+                            <span id="scope-2">Architectural & Spatial</span>
+                        </label>
+                        <label class="scope-btn">
+                            <input type="checkbox" name="scope" value="culinary">
+                            <span id="scope-3">Culinary & Hospitality Arts</span>
+                        </label>
+                        <label class="scope-btn">
+                            <input type="checkbox" name="scope" value="executive">
+                            <span id="scope-4">Executive Portraiture</span>
+                        </label>
+                        <label class="scope-btn">
+                            <input type="checkbox" name="scope" value="private">
+                            <span id="scope-5">Private High-Profile Commission</span>
+                        </label>
+                    </div>
                 </div>
-                <div class="absolute bottom-3 right-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-amber-300/90">
-                    MAG 2.0X AVAILABLE
-                </div>
-            </div>
 
-            <div class="mt-4 space-y-2 px-1">
-                <div class="flex items-center justify-between text-xs">
-                    <span class="font-mono text-zinc-500 text-[10px]">PROJECT: PRIVATE ESTATE</span>
-                    <span class="font-mono text-amber-400/80 text-[10px]">REF: #9012</span>
+                <!-- 4. Communication Method -->
+                <div class="form-group">
+                    <label id="lbl-comm">4. Preferred Mode of Communication</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="communication" value="whatsapp" checked>
+                            <span id="comm-1">WhatsApp / Voice Note</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="communication" value="phone">
+                            <span id="comm-2">Direct Phone Call</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="communication" value="email">
+                            <span id="comm-3">Official Email</span>
+                        </label>
+                    </div>
                 </div>
-                <h3 class="text-base font-light text-zinc-100 group-hover:text-amber-200 transition-colors">Minimalist Concrete & Shadow Play</h3>
-                <p class="text-xs font-mono text-zinc-400 border-t border-zinc-900 pt-2 flex justify-between">
-                    <span>PERSPECTIVE: TILT-SHIFT</span>
-                    <span>QASSIM</span>
-                </p>
-            </div>
-        </article>
 
-        <!-- Item 03 -->
-        <article class="card-glass rounded-2xl overflow-hidden p-4 group relative cursor-crosshair"
-                 data-inspect-src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1800&q=90">
-            
-            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-zinc-950 relative border border-zinc-900">
-                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" 
-                     alt="Coffee" class="port-img w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
-                
-                <div class="absolute top-3 left-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-zinc-400">
-                    CULINARY // CRAFT
+                <!-- 5. Brief Overview -->
+                <div class="form-group">
+                    <label id="lbl-brief">5. Brief Overview / Project Details (Optional)</label>
+                    <textarea class="form-control" rows="4" id="brief-ph" placeholder="Tell us about your project timeline and objectives..."></textarea>
                 </div>
-                <div class="absolute bottom-3 right-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-amber-300/90">
-                    MAG 2.0X AVAILABLE
-                </div>
-            </div>
 
-            <div class="mt-4 space-y-2 px-1">
-                <div class="flex items-center justify-between text-xs">
-                    <span class="font-mono text-zinc-500 text-[10px]">CLIENT: SPECIALTY ROASTERY</span>
-                    <span class="font-mono text-amber-400/80 text-[10px]">REF: #4410</span>
-                </div>
-                <h3 class="text-base font-light text-zinc-100 group-hover:text-amber-200 transition-colors">Atmospheric Steam & Viscosity</h3>
-                <p class="text-xs font-mono text-zinc-400 border-t border-zinc-900 pt-2 flex justify-between">
-                    <span>TEMP: 4500K WARM</span>
-                    <span>BURAIDAH</span>
-                </p>
-            </div>
-        </article>
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submit-btn">Send Inquiry</button>
+            </form>
+        </div>
+    </section>
 
-    </main>
+    <footer>
+        <p>&copy; 2026 S6 PHOTOGRAPH. ALL RIGHTS RESERVED.</p>
+    </footer>
 
+    <!-- Localization Logic -->
     <script>
-        // Magnifying Loupe Logic
-        const loupe = document.getElementById('loupe');
-        const cards = document.querySelectorAll('article[data-inspect-src]');
+        let currentLang = 'en';
 
-        cards.forEach(card => {
-            const highResSrc = card.getAttribute('data-inspect-src');
-            const img = card.querySelector('.port-img');
-
-            card.addEventListener('mouseenter', () => {
-                loupe.style.display = 'block';
-                loupe.style.backgroundImage = `url('${highResSrc}')`;
-                loupe.style.backgroundSize = `${img.width * 2.2}px ${img.height * 2.2}px`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                loupe.style.display = 'none';
-            });
-
-            card.addEventListener('mousemove', (e) => {
-                const rect = img.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                // Move Loupe element
-                loupe.style.left = `${e.clientX}px`;
-                loupe.style.top = `${e.clientY}px`;
-
-                // Calculate Magnified Position
-                const bgX = (x / rect.width) * 100;
-                const bgY = (y / rect.height) * 100;
-                loupe.style.backgroundPosition = `${bgX}% ${bgY}%`;
-            });
-        });
-
-        // Grid Switcher
-        function setGrid(cols) {
-            const container = document.getElementById('portfolio-container');
-            const btn2 = document.getElementById('btn-grid-2');
-            const btn3 = document.getElementById('btn-grid-3');
-
-            if (cols === 2) {
-                container.className = "max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8";
-                btn2.className = "px-3 py-1.5 rounded bg-zinc-800 text-amber-300 transition-all";
-                btn3.className = "px-3 py-1.5 rounded hover:text-white transition-all";
-            } else {
-                container.className = "max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
-                btn3.className = "px-3 py-1.5 rounded bg-zinc-800 text-amber-300 transition-all";
-                btn2.className = "px-3 py-1.5 rounded hover:text-white transition-all";
+        const dict = {
+            en: {
+                aboutNav: "About",
+                servicesNav: "Services",
+                commissionNav: "Commission",
+                langBtn: "العربية",
+                heroTitle: "Pioneering Commercial Visual Craft in Buraidah",
+                heroSub: "Built on quiet mastery, spatial discipline, and responsible quality ethics. Color-matched, multi-resolution asset delivery tailored specifically for print, digital web, and billboard standards.",
+                heroBtn: "Initiate a Commission",
+                aboutHeading: "Trusted by Brands",
+                aboutSub: "Proudly based in Buraidah, serving visionaries and brands across the region with distinction and care.",
+                pillar1: "Proudly rooted in Buraidah, setting an elevated benchmark for commercial visual art and empowering local brands to shine at global standards.",
+                pillar2: "Honoring every client, product, and space with dedicated attention to detail, visual integrity, and true professionalism.",
+                pillar3: "Dedicated to capturing regional stories with authenticity, depth, and uncompromising visual standards.",
+                servicesHeading: "Services & Practice",
+                servicesSub: "Multi-resolution asset delivery tailored specifically for print, digital web, and billboard standards.",
+                srv1Title: "Visual Strategy & Pre-Visualization",
+                srv1Desc: "Detailed consultation, lighting plans, and moodboards to align expectations before a single frame is shot.",
+                srv2Title: "Discreet Protocols & Data Security",
+                srv2Desc: "Strict Non-Disclosure Agreements (NDAs), encrypted asset management, and closed-set protocols designed to protect unreleased products, private estates, and executive privacy throughout production.",
+                srv3Title: "Asset Architecture & Multi-Medium Mapping",
+                srv3Desc: "Pre-mapping every frame to its final destination—from large-scale outdoor billboards and luxury print to private investor decks—ensuring maximum utility and zero wasted executive time on set.",
+                commHeading: "Initiate a Commission",
+                commSub: "Available for commercial commissions, brand launches, and architectural documentation in Buraidah and across the GCC.",
+                lblName: "1. Full Name & Brand / Organization",
+                lblPhone: "2. Contact Number",
+                lblScope: "3. Select Project Scope",
+                scope1: "Commercial & Product Still Life",
+                scope2: "Architectural & Spatial",
+                scope3: "Culinary & Hospitality Arts",
+                scope4: "Executive Portraiture",
+                scope5: "Private High-Profile Commission",
+                lblComm: "4. Preferred Mode of Communication",
+                comm1: "WhatsApp / Voice Note",
+                comm2: "Direct Phone Call",
+                comm3: "Official Email",
+                lblBrief: "5. Brief Overview / Project Details (Optional)",
+                briefPh: "Tell us about your project timeline and objectives...",
+                submitBtn: "Send Inquiry"
+            },
+            ar: {
+                aboutNav: "عن الشركة",
+                servicesNav: "الخدمات",
+                commissionNav: "ابدأ تعاونك",
+                langBtn: "English",
+                heroTitle: "رواد الفن البصري التجاري في بريدة",
+                heroSub: "إتقان يجسد القيمة، ومسؤولية ترتقي بالمشهد. تسليم أصول بصرية متعددة الدقة ومطابقة للألوان مخصصة للطباعة، الويب، واللوحات الإعلانية.",
+                heroBtn: "ابدأ تعاونك معنا",
+                aboutHeading: "محل ثقة العلامات التجارية",
+                aboutSub: "فخورون بوجودنا في بريدة، ونخدم أصحاب الرؤى والعلامات التجارية في المنطقة بتميز وعناية.",
+                pillar1: "فخورون بجذورنا في بريدة، ونضع معياراً رفيعاً للفن البصري التجاري لفتح المجال للعلامات المحلية للتألق بمعايير عالمية.",
+                pillar2: "نحترم كل عميل ومنتج ومساحة مع الاهتمام الدقيق بالتفاصيل، والنزاهة البصرية، والاحترافية الحقيقية.",
+                pillar3: "نلتزم بإبراز حكايات علامتك التجارية بأصالة، وعمق، ومعايير بصيرة تصنع الفارق.",
+                servicesHeading: "الخدمات والممارسات",
+                servicesSub: "تسليم أصول بصرية متعددة الدقة ومطابقة للألوان مخصصة للطباعة، الويب، واللوحات الإعلانية.",
+                srv1Title: "التخطيط والرؤية البصرية",
+                srv1Desc: "استشارات تفصيلية، خطط إضاءة، ولوحات أفكار لتحديد التوقعات بدقة قبل تصوير أي لقطة.",
+                srv2Title: "البرتوكول والسرية الرقمية",
+                srv2Desc: "اتفاقيات سرية صارمة (NDAs)، إدارة مشفّرة للأصول البصرية، وبروتوكولات موقع مغلق لضمان الخصوصية التامة للمنتجات قبل إطلاقها وللقيادات والشخصيات رفيعة المستوى.",
+                srv3Title: "هندسة الأصول وتخطيط المنصات",
+                srv3Desc: "تخطيط كل لقطة مسبقاً لتناسب المنصات المستهدفة—من اللوحات الإعلانية الضخمة والمطبوعات الفاخرة إلى العروض الاستثمارية—لتحقيق أقصى استغلال للأصول وتوفير وقت العميل.",
+                commHeading: "ابدأ تعاونك معنا",
+                commSub: "متاحون للمشاريع التجارية، إطلاق العلامات، والتوثيق المعماري في بريدة وكافة أنحاء المنطقة.",
+                lblName: "١. الاسم والجهة",
+                lblPhone: "٢. رقم التواصل",
+                lblScope: "٣. اختر نوع المشروع",
+                scope1: "المنتجات والعلامات التجارية",
+                scope2: "التصوير المعماري والمساحات",
+                scope3: "الفنون الطهوية والضيافة",
+                scope4: "البورتريه ورجال الأعمال",
+                scope5: "مشروع خاص رفيع المستوى",
+                lblComm: "٤. وسيلة التواصل المفضلة",
+                comm1: "واتساب / رسالة صوتية",
+                comm2: "اتصال هاتفي",
+                comm3: "البريد الإلكتروني",
+                lblBrief: "٥. تفاصيل المشروع (اختياري)",
+                briefPh: "حدثنا عن الجدول الزمني وأهداف مشروعك...",
+                submitBtn: "إرسال الطلب"
             }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const html = document.documentElement;
+            
+            html.setAttribute('lang', currentLang);
+            html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+            const t = dict[currentLang];
+
+            document.getElementById('nav-about').textContent = t.aboutNav;
+            document.getElementById('nav-services').textContent = t.servicesNav;
+            document.getElementById('nav-commission').textContent = t.commissionNav;
+            document.getElementById('lang-btn').textContent = t.langBtn;
+
+            document.getElementById('hero-title').textContent = t.heroTitle;
+            document.getElementById('hero-sub').textContent = t.heroSub;
+            document.getElementById('hero-btn').textContent = t.heroBtn;
+
+            document.getElementById('about-heading').textContent = t.aboutHeading;
+            document.getElementById('about-sub').textContent = t.aboutSub;
+            document.getElementById('pillar-1').textContent = t.pillar1;
+            document.getElementById('pillar-2').textContent = t.pillar2;
+            document.getElementById('pillar-3').textContent = t.pillar3;
+
+            document.getElementById('services-heading').textContent = t.servicesHeading;
+            document.getElementById('services-sub').textContent = t.servicesSub;
+            document.getElementById('srv1-title').textContent = t.srv1Title;
+            document.getElementById('srv1-desc').textContent = t.srv1Desc;
+            document.getElementById('srv2-title').textContent = t.srv2Title;
+            document.getElementById('srv2-desc').textContent = t.srv2Desc;
+            document.getElementById('srv3-title').textContent = t.srv3Title;
+            document.getElementById('srv3-desc').textContent = t.srv3Desc;
+
+            document.getElementById('comm-heading').textContent = t.commHeading;
+            document.getElementById('comm-sub').textContent = t.commSub;
+            document.getElementById('lbl-name').textContent = t.lblName;
+            document.getElementById('lbl-phone').textContent = t.lblPhone;
+            document.getElementById('lbl-scope').textContent = t.lblScope;
+            document.getElementById('scope-1').textContent = t.scope1;
+            document.getElementById('scope-2').textContent = t.scope2;
+            document.getElementById('scope-3').textContent = t.scope3;
+            document.getElementById('scope-4').textContent = t.scope4;
+            document.getElementById('scope-5').textContent = t.scope5;
+
+            document.getElementById('lbl-comm').textContent = t.lblComm;
+            document.getElementById('comm-1').textContent = t.comm1;
+            document.getElementById('comm-2').textContent = t.comm2;
+            document.getElementById('comm-3').textContent = t.comm3;
+
+            document.getElementById('lbl-brief').textContent = t.lblBrief;
+            document.getElementById('brief-ph').placeholder = t.briefPh;
+            document.getElementById('submit-btn').textContent = t.submitBtn;
         }
     </script>
 </body>
