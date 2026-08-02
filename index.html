@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S6 ARCHIVAL // Darkroom Inspection Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #f4f4f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Subtle Grid Pattern overlaying darkroom background */
+        .darkroom-grid {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Glassmorphic Dark Card */
+        .card-glass {
+            background: rgba(15, 15, 18, 0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-glass:hover {
+            border-color: rgba(251, 191, 36, 0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(245, 158, 11, 0.1);
+        }
+
+        /* Inspection Magnifier Lens Glass */
+        #loupe {
+            pointer-events: none;
+            position: fixed;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 1px solid rgba(251, 191, 36, 0.6);
+            box-shadow: 0 0 0 10000px rgba(5, 5, 5, 0.35), 0 10px 25px rgba(0,0,0,0.8), inset 0 0 15px rgba(255,255,255,0.2);
+            background-repeat: no-repeat;
+            display: none;
+            z-index: 100;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="darkroom-grid min-h-screen antialiased selection:bg-amber-500/20 selection:text-amber-200 p-6 lg:p-12">
+
+    <!-- Interactive Loupe Element -->
+    <div id="loupe"></div>
+
+    <!-- Header Control Bar -->
+    <header class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-zinc-900 mb-12">
+        <div>
+            <div class="flex items-center gap-3 mb-1">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                <span class="text-[10px] font-mono tracking-[0.3em] text-amber-400/90 uppercase">INSPECTION MODE // LIGHT-TABLE 01</span>
+            </div>
+            <h1 class="text-2xl font-light text-zinc-100">Curated Commercial Works</h1>
+        </div>
+
+        <div class="flex items-center gap-6 text-xs font-mono text-zinc-400">
+            <span class="hidden sm:inline-block text-zinc-600">// HOVER TILES TO ENGAGE LOUPE MAGNIFIER</span>
+            <div class="flex bg-zinc-900/80 p-1 rounded-lg border border-zinc-800">
+                <button onclick="setGrid(3)" id="btn-grid-3" class="px-3 py-1.5 rounded bg-zinc-800 text-amber-300 transition-all">3 COL</button>
+                <button onclick="setGrid(2)" id="btn-grid-2" class="px-3 py-1.5 rounded hover:text-white transition-all">2 COL</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Light-Table Portfolio Canvas -->
+    <main id="portfolio-container" class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Item 01 -->
+        <article class="card-glass rounded-2xl overflow-hidden p-4 group relative cursor-crosshair"
+                 data-inspect-src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1800&q=90">
+            
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-zinc-950 relative border border-zinc-900">
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" 
+                     alt="Perfume" class="port-img w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+                
+                <!-- Corner Technical Markings -->
+                <div class="absolute top-3 left-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-zinc-400">
+                    SERIES: 001 // OUD
+                </div>
+                <div class="absolute bottom-3 right-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-amber-300/90">
+                    MAG 2.0X AVAILABLE
+                </div>
+            </div>
+
+            <div class="mt-4 space-y-2 px-1">
+                <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-zinc-500 text-[10px]">CLIENT: ESTKNAN PERFUMES</span>
+                    <span class="font-mono text-amber-400/80 text-[10px]">REF: #8820</span>
+                </div>
+                <h3 class="text-base font-light text-zinc-100 group-hover:text-amber-200 transition-colors">Obsidian Glass Refraction Study</h3>
+                <p class="text-xs font-mono text-zinc-400 border-t border-zinc-900 pt-2 flex justify-between">
+                    <span>LIGHT: 3200K DIFFUSED</span>
+                    <span>BURAIDAH</span>
+                </p>
+            </div>
+        </article>
+
+        <!-- Item 02 -->
+        <article class="card-glass rounded-2xl overflow-hidden p-4 group relative cursor-crosshair"
+                 data-inspect-src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=90">
+            
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-zinc-950 relative border border-zinc-900">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" 
+                     alt="Architecture" class="port-img w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+                
+                <div class="absolute top-3 left-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-zinc-400">
+                    ARCHITECTURAL // SPATIAL
+                </div>
+                <div class="absolute bottom-3 right-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-amber-300/90">
+                    MAG 2.0X AVAILABLE
+                </div>
+            </div>
+
+            <div class="mt-4 space-y-2 px-1">
+                <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-zinc-500 text-[10px]">PROJECT: PRIVATE ESTATE</span>
+                    <span class="font-mono text-amber-400/80 text-[10px]">REF: #9012</span>
+                </div>
+                <h3 class="text-base font-light text-zinc-100 group-hover:text-amber-200 transition-colors">Minimalist Concrete & Shadow Play</h3>
+                <p class="text-xs font-mono text-zinc-400 border-t border-zinc-900 pt-2 flex justify-between">
+                    <span>PERSPECTIVE: TILT-SHIFT</span>
+                    <span>QASSIM</span>
+                </p>
+            </div>
+        </article>
+
+        <!-- Item 03 -->
+        <article class="card-glass rounded-2xl overflow-hidden p-4 group relative cursor-crosshair"
+                 data-inspect-src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1800&q=90">
+            
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-zinc-950 relative border border-zinc-900">
+                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" 
+                     alt="Coffee" class="port-img w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+                
+                <div class="absolute top-3 left-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-zinc-400">
+                    CULINARY // CRAFT
+                </div>
+                <div class="absolute bottom-3 right-3 text-[9px] font-mono bg-zinc-950/80 backdrop-blur px-2 py-0.5 rounded border border-zinc-800/80 text-amber-300/90">
+                    MAG 2.0X AVAILABLE
+                </div>
+            </div>
+
+            <div class="mt-4 space-y-2 px-1">
+                <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-zinc-500 text-[10px]">CLIENT: SPECIALTY ROASTERY</span>
+                    <span class="font-mono text-amber-400/80 text-[10px]">REF: #4410</span>
+                </div>
+                <h3 class="text-base font-light text-zinc-100 group-hover:text-amber-200 transition-colors">Atmospheric Steam & Viscosity</h3>
+                <p class="text-xs font-mono text-zinc-400 border-t border-zinc-900 pt-2 flex justify-between">
+                    <span>TEMP: 4500K WARM</span>
+                    <span>BURAIDAH</span>
+                </p>
+            </div>
+        </article>
+
+    </main>
+
+    <script>
+        // Magnifying Loupe Logic
+        const loupe = document.getElementById('loupe');
+        const cards = document.querySelectorAll('article[data-inspect-src]');
+
+        cards.forEach(card => {
+            const highResSrc = card.getAttribute('data-inspect-src');
+            const img = card.querySelector('.port-img');
+
+            card.addEventListener('mouseenter', () => {
+                loupe.style.display = 'block';
+                loupe.style.backgroundImage = `url('${highResSrc}')`;
+                loupe.style.backgroundSize = `${img.width * 2.2}px ${img.height * 2.2}px`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                loupe.style.display = 'none';
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = img.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Move Loupe element
+                loupe.style.left = `${e.clientX}px`;
+                loupe.style.top = `${e.clientY}px`;
+
+                // Calculate Magnified Position
+                const bgX = (x / rect.width) * 100;
+                const bgY = (y / rect.height) * 100;
+                loupe.style.backgroundPosition = `${bgX}% ${bgY}%`;
+            });
+        });
+
+        // Grid Switcher
+        function setGrid(cols) {
+            const container = document.getElementById('portfolio-container');
+            const btn2 = document.getElementById('btn-grid-2');
+            const btn3 = document.getElementById('btn-grid-3');
+
+            if (cols === 2) {
+                container.className = "max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8";
+                btn2.className = "px-3 py-1.5 rounded bg-zinc-800 text-amber-300 transition-all";
+                btn3.className = "px-3 py-1.5 rounded hover:text-white transition-all";
+            } else {
+                container.className = "max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+                btn3.className = "px-3 py-1.5 rounded bg-zinc-800 text-amber-300 transition-all";
+                btn2.className = "px-3 py-1.5 rounded hover:text-white transition-all";
+            }
+        }
+    </script>
+</body>
+</html>
