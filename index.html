@@ -164,66 +164,63 @@
         }
 
         /* BRAND TICKER SECTION */
-        .logo-ticker-container {
-            width: 100%;
-            overflow: hidden;
-            background: var(--bg-card);
-            border-top: 1px solid rgba(197, 160, 89, 0.12);
-            border-bottom: 1px solid rgba(197, 160, 89, 0.12);
-            padding: 35px 0;
-            position: relative;
-            /* Creates a smooth fade-out effect on left/right edges */
-            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        }
+        /* Logo Ticker Container */
+.logo-ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: #000000; /* Pure black background */
+    padding: 30px 0; /* Extra vertical space for larger logos */
+    position: relative;
+}
 
-        .logo-ticker-track {
-            display: flex;
-            width: max-content;
-            animation: scrollTicker 30s linear infinite;
-        }
+/* Optional Edge Fade Effect for smooth entry/exit */
+.logo-ticker-container::before,
+.logo-ticker-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+.logo-ticker-container::before {
+    left: 0;
+    background: linear-gradient(to right, #000000, transparent);
+}
+.logo-ticker-container::after {
+    right: 0;
+    background: linear-gradient(to left, #000000, transparent);
+}
 
-        .logo-ticker-container:hover .logo-ticker-track {
-            animation-play-state: paused;
-        }
+/* Track & Animation */
+.logo-ticker-track {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Space between logos */
+    width: max-content;
+    animation: scrollTicker 45s linear infinite;
+}
 
-        .logo-ticker-track img {
-            height: 48px;
-            width: auto;
-            margin: 0 40px;
-            opacity: 0.65;
-            filter: grayscale(100%) contrast(120%);
-            transition: opacity 0.3s ease, filter 0.3s ease;
-        }
+/* Logo Image Adjustments */
+.logo-ticker-track img {
+    height: 65px; /* Increased logo size (adjust to 70px/80px if you want larger) */
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: screen; /* Blends dark image backgrounds seamlessly into pure black */
+    filter: brightness(0.9) contrast(1.1); /* Subtle polish for clean visual consistency */
+    transition: transform 0.3s ease;
+}
 
-        .logo-ticker-track img:hover {
-            opacity: 1;
-            filter: grayscale(0%);
-        }
-
-        @keyframes scrollTicker {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Adjust scroll direction when page is set to RTL */
-        [dir="rtl"] .logo-ticker-track {
-            animation: scrollTickerRTL 30s linear infinite;
-        }
-
-        @keyframes scrollTickerRTL {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(50%);
-            }
-        }
-
+/* Seamless Continuous Scroll Animation */
+@keyframes scrollTicker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
         /* SECTIONS */
         section {
             padding: 110px 8%;
