@@ -216,6 +216,39 @@
             font-weight: 300;
         }
 
+        /* WORK / PORTFOLIO GALLERY */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-item {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--gold-accent);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
         /* SERVICES */
         .services-grid {
             display: grid;
@@ -377,9 +410,10 @@
 
     <!-- Header Navigation -->
     <header>
-        <a href="#" class="logo">S6 Photograph</a>
+        <a href="#" class="logo">S6 MEDIA</a>
         <nav>
             <a href="#about" id="nav-about">About</a>
+            <a href="#work" id="nav-work">Work</a>
             <a href="#services" id="nav-services">Services</a>
             <a href="#commission" id="nav-commission">Commission</a>
             <button class="lang-btn" onclick="toggleLanguage()" id="lang-btn">العربية</button>
@@ -408,6 +442,28 @@
             </div>
             <div class="pillar-card">
                 <p id="pillar-3">Dedicated to capturing regional stories with authenticity, depth, and uncompromising visual standards.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Work / Portfolio Section -->
+    <section id="work">
+        <div class="section-header">
+            <h2 id="work-heading">Featured Commercial Work</h2>
+            <p id="work-sub">High-precision commercial, culinary, and product still life executed with spatial discipline.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/product-photography/1-4.jpg" alt="Commercial Photography 1" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/product-photography/2-4.jpg" alt="Commercial Photography 2" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/product-photography/3-4.jpg" alt="Commercial Photography 3" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/product-photography/4-3.jpg" alt="Commercial Photography 4" loading="lazy">
             </div>
         </div>
     </section>
@@ -522,7 +578,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 S6 PHOTOGRAPH. ALL RIGHTS RESERVED.</p>
+        <p>&copy; 2026 S6 MEDIA. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <!-- Localization Logic -->
@@ -532,6 +588,7 @@
         const dict = {
             en: {
                 aboutNav: "About",
+                workNav: "Work",
                 servicesNav: "Services",
                 commissionNav: "Commission",
                 langBtn: "العربية",
@@ -543,6 +600,8 @@
                 pillar1: "Proudly rooted in Buraidah, setting an elevated benchmark for commercial visual art and empowering local brands to shine at global standards.",
                 pillar2: "Honoring every client, product, and space with dedicated attention to detail, visual integrity, and true professionalism.",
                 pillar3: "Dedicated to capturing regional stories with authenticity, depth, and uncompromising visual standards.",
+                workHeading: "Featured Commercial Work",
+                workSub: "High-precision commercial, culinary, and product still life executed with spatial discipline.",
                 servicesHeading: "Services & Practice",
                 servicesSub: "Multi-resolution asset delivery tailored specifically for print, digital web, and billboard standards.",
                 srv1Title: "Visual Strategy & Pre-Visualization",
@@ -571,6 +630,7 @@
             },
             ar: {
                 aboutNav: "عن الشركة",
+                workNav: "معرض الأعمال",
                 servicesNav: "الخدمات",
                 commissionNav: "ابدأ تعاونك",
                 langBtn: "English",
@@ -582,6 +642,8 @@
                 pillar1: "فخورون بجذورنا في بريدة، ونضع معياراً رفيعاً للفن البصري التجاري لفتح المجال للعلامات المحلية للتألق بمعايير عالمية.",
                 pillar2: "نحترم كل عميل ومنتج ومساحة مع الاهتمام الدقيق بالتفاصيل، والنزاهة البصرية، والاحترافية الحقيقية.",
                 pillar3: "نلتزم بإبراز حكايات علامتك التجارية بأصالة، وعمق، ومعايير بصيرة تصنع الفارق.",
+                workHeading: "أبرز الأعمال التجارية",
+                workSub: "تصوير تجاري وطهي ومنتجات بدقة عالية وإتقان بصري مميز.",
                 servicesHeading: "الخدمات والممارسات",
                 servicesSub: "تسليم أصول بصرية متعددة الدقة ومطابقة للألوان مخصصة للطباعة، الويب، واللوحات الإعلانية.",
                 srv1Title: "التخطيط والرؤية البصرية",
@@ -620,6 +682,7 @@
             const t = dict[currentLang];
 
             document.getElementById('nav-about').textContent = t.aboutNav;
+            document.getElementById('nav-work').textContent = t.workNav;
             document.getElementById('nav-services').textContent = t.servicesNav;
             document.getElementById('nav-commission').textContent = t.commissionNav;
             document.getElementById('lang-btn').textContent = t.langBtn;
@@ -633,6 +696,9 @@
             document.getElementById('pillar-1').textContent = t.pillar1;
             document.getElementById('pillar-2').textContent = t.pillar2;
             document.getElementById('pillar-3').textContent = t.pillar3;
+
+            document.getElementById('work-heading').textContent = t.workHeading;
+            document.getElementById('work-sub').textContent = t.workSub;
 
             document.getElementById('services-heading').textContent = t.servicesHeading;
             document.getElementById('services-sub').textContent = t.servicesSub;
