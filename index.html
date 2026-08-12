@@ -122,16 +122,15 @@
             width: 100%; overflow: hidden; background-color: #000000; padding: 34px 0; position: relative;
             display: flex; /* Ensures duplicated track sits in a single horizontal line */
         }
-        .logo-ticker-container::before, .logo-ticker-container::after {
-            content: ""; position: absolute; top: 0; width: 80px; height: 100%; z-index: 2; pointer-events: none;
-        }
-        .logo-ticker-container::before { inset-inline-start: 0; background: linear-gradient(to right, #000000, transparent); }
-        .logo-ticker-container::after { inset-inline-end: 0; background: linear-gradient(to left, #000000, transparent); }
-        .logo-ticker-track {
-            display: flex; align-items: center; gap: 48px; width: max-content; flex-shrink: 0;
-            padding-right: 48px;
-            animation: scrollTicker 45s linear infinite;
-        }
+        .logo-ticker-container {
+    width: 100%; overflow: hidden; background-color: #000000; padding: 34px 0; position: relative;
+    display: flex; /* Ensures duplicated track sits in a single horizontal line */
+}
+
+[dir="rtl"] .logo-ticker-container {
+    direction: ltr;
+}
+     
         .logo-ticker-track img {
             height: 72px; width: auto; object-fit: contain; mix-blend-mode: screen;
             filter: brightness(0.95) contrast(1.1); transition: transform 0.3s ease;
