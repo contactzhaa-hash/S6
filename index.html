@@ -117,29 +117,80 @@
         }
         .btn-primary:hover { background: var(--gold-accent); color: var(--bg-dark); box-shadow: 0 0 25px rgba(201, 123, 74, 0.3); }
 
-        /* LOGO TICKER */
-        .logo-ticker-container {
-            width: 100%; overflow: hidden; background-color: #000000; padding: 34px 0; position: relative;
-            display: flex; /* Ensures duplicated track sits in a single horizontal line */
-        }
-        .logo-ticker-container {
-    width: 100%; overflow: hidden; background-color: #000000; padding: 34px 0; position: relative;
-    display: flex; /* Ensures duplicated track sits in a single horizontal line */
+/* LOGO TICKER */
+.logo-ticker-container {
+    width: 100%; 
+    overflow: hidden; 
+    background-color: #000000; 
+    padding: 34px 0; 
+    position: relative;
+    display: flex;
+    direction: ltr !important; /* Prevents RTL layout from breaking horizontal loop */
 }
 
-[dir="rtl"] .logo-ticker-container {
-    direction: ltr;
+/* Force LTR on all ticker elements regardless of page language */
+.logo-ticker-container, 
+.logo-ticker-container * {
+    direction: ltr !important;
 }
-     
-        .logo-ticker-track img {
-            height: 72px; width: auto; object-fit: contain; mix-blend-mode: screen;
-            filter: brightness(0.95) contrast(1.1); transition: transform 0.3s ease;
-            background: #0000; min-width: 100px;
-        }
-        .logo-ticker-track img.img-missing {
-            height: 52px; width: 110px; mix-blend-mode: normal; filter: none;
-            border: 1px dashed rgba(201,123,74,0.25); opacity: 0.35;
-        }
+
+.logo-ticker-container::before, 
+.logo-ticker-container::after {
+    content: ""; 
+    position: absolute; 
+    top: 0; 
+    width: 80px; 
+    height: 100%; 
+    z-index: 2; 
+    pointer-events: none;
+}
+.logo-ticker-container::before { 
+    left: 0; 
+    background: linear-gradient(to right, #000000, transparent); 
+}
+.logo-ticker-container::after { 
+    right: 0; 
+    background: linear-gradient(to left, #000000, transparent); 
+}
+
+.logo-ticker-track {
+    display: flex; 
+    align-items: center; 
+    gap: 48px; 
+    width: max-content; 
+    flex-shrink: 0;
+    padding-right: 48px;
+    animation: scrollTicker 45s linear infinite;
+    will-change: transform;
+}
+.logo-ticker-track img {
+    height: 72px; 
+    width: auto; 
+    object-fit: contain; 
+    mix-blend-mode: screen;
+    filter: brightness(0.95) contrast(1.1); 
+    transition: transform 0.3s ease;
+    background: #0000; 
+    min-width: 100px;
+}
+.logo-ticker-track img.img-missing {
+    height: 52px; 
+    width: 110px; 
+    mix-blend-mode: normal; 
+    filter: none;
+    border: 1px dashed rgba(201,123,74,0.25); 
+    opacity: 0.35;
+}
+
+@keyframes scrollTicker { 
+    0% { transform: translate3d(0, 0, 0); } 
+    100% { transform: translate3d(-100%, 0, 0); } 
+}
+
+@media (prefers-reduced-motion: reduce) { 
+    .logo-ticker-track { animation: none; overflow-x: auto; } 
+}
+
         @keyframes scrollTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         @media (prefers-reduced-motion: reduce) { .logo-ticker-track { animation: none; overflow-x: auto; } }
 
