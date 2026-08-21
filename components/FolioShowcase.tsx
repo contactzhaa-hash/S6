@@ -8,11 +8,11 @@ interface FolioProps {
 }
 
 const folders = [
-  { id: 'all', en: 'All Disciplines', ar: 'كافة الأعمال' },
+  { id: 'all', en: 'All Archives', ar: 'كافة الأعمال' },
   { id: 'product', en: 'Product Still Life', ar: 'تصوير المنتجات' },
-  { id: 'print', en: 'Bespoke Print & Pack', ar: 'المطبوعات والتغليف' },
+  { id: 'print', en: 'Print & Packaging', ar: 'المطبوعات والتغليف' },
   { id: 'motion', en: 'Commercial Motion', ar: 'الإنتاج السينمائي' },
-  { id: 'space', en: 'Spatial & Interiors', ar: 'المساحات والمعمار' }
+  { id: 'space', en: 'Spatial Architecture', ar: 'المساحات والمعمار' }
 ];
 
 const projects = [
@@ -90,24 +90,24 @@ export default function FolioShowcase({ lang, onSelectWork }: FolioProps) {
     <section id="work" className="px-6 md:px-16 py-28 max-w-7xl mx-auto z-10 relative">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
         <div>
-          <span className="text-[10px] tracking-[0.3em] font-mono uppercase text-[#C97B4A] block mb-2">
+          <span className="text-[10px] tracking-[0.3em] font-mono uppercase text-[#D6B278] block mb-2">
             {isAr ? 'الأرشيف البصري' : 'Visual Portfolio'}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-serif text-[#E0B27E]">
+          <h2 className="text-3xl sm:text-5xl font-serif text-[#F0D4A3]">
             {isAr ? 'أعمال تم تنفيذها بعناية' : 'Curated Commissions'}
           </h2>
         </div>
 
         {/* Tab Filters */}
-        <div className="flex flex-wrap gap-2 p-1.5 bg-[#120D09] border border-[#C97B4A]/20 rounded-md">
+        <div className="flex flex-wrap gap-2 p-1.5 bg-[#0E1116] border border-[#D6B278]/20 rounded-md">
           {folders.map(f => (
             <button
               key={f.id}
               onClick={() => setActiveTab(f.id)}
-              className={`text-[11px] uppercase tracking-wider px-3.5 py-1.5 rounded transition ${
+              className={`text-[11px] uppercase tracking-wider px-3.5 py-1.5 rounded transition duration-200 ${
                 activeTab === f.id
-                  ? 'bg-[#C97B4A] text-[#070503] font-semibold shadow'
-                  : 'text-[#A6907A] hover:text-white hover:bg-[#1A120C]'
+                  ? 'bg-[#D6B278] text-[#050709] font-semibold shadow'
+                  : 'text-[#94A3B8] hover:text-white hover:bg-[#151921]'
               }`}
             >
               {isAr ? f.ar : f.en}
@@ -122,16 +122,16 @@ export default function FolioShowcase({ lang, onSelectWork }: FolioProps) {
           <div
             key={idx}
             onClick={onSelectWork}
-            className={`group relative overflow-hidden bg-[#120D09] border border-[#C97B4A]/15 cursor-pointer rounded-sm ${item.span}`}
+            className={`group relative overflow-hidden bg-[#0E1116] border border-[#D6B278]/15 cursor-pointer rounded ${item.span}`}
           >
             <img
               src={item.img}
               alt={item.titleEn}
-              className="w-full h-full object-cover grayscale-[30%] contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+              className="w-full h-full object-cover grayscale-[25%] contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
               onError={(e) => { e.currentTarget.src = item.fallback; }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#070503]/95 via-[#070503]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-8 flex flex-col justify-end">
-              <span className="text-[10px] font-mono tracking-widest text-[#C97B4A] uppercase mb-1">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050709]/95 via-[#050709]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-8 flex flex-col justify-end">
+              <span className="text-[10px] font-mono tracking-widest text-[#D6B278] uppercase mb-1">
                 {isAr ? item.scopeAr : item.scopeEn}
               </span>
               <h3 className="text-xl sm:text-2xl font-serif text-white">
