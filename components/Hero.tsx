@@ -12,7 +12,6 @@ export default function Hero({ lang, onOpenDrawer }: HeroProps) {
 
   return (
     <section className="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-6 pt-32 pb-24 z-10">
-      {/* Dynamic Status Badge */}
       <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0E1116] border border-[#D6B278]/30 mb-8 shadow-inner shadow-black/60">
         <span className="w-2 h-2 rounded-full bg-[#D6B278] animate-ping" />
         <span className="text-[10px] tracking-[0.25em] uppercase text-[#F0D4A3] font-mono">
@@ -34,7 +33,6 @@ export default function Hero({ lang, onOpenDrawer }: HeroProps) {
           : 'Unified visual architectures: master-tier product still life, cinematic motion campaigns, precision color science, and tactile print packaging.'}
       </p>
 
-      {/* CTA Button Group */}
       <div className="flex flex-col sm:flex-row items-center gap-4">
         <button
           onClick={onOpenDrawer}
@@ -50,7 +48,6 @@ export default function Hero({ lang, onOpenDrawer }: HeroProps) {
         </a>
       </div>
 
-      {/* Scroll Down Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition duration-300">
         <span className="text-[9px] uppercase tracking-[0.3em] font-mono text-[#94A3B8]">Scroll</span>
         <div className="w-[1px] h-9 bg-gradient-to-b from-[#D6B278] to-transparent animate-bounce" />

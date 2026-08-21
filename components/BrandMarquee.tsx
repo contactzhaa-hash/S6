@@ -13,14 +13,14 @@ export default function BrandMarquee({ lang }: { lang: 'en' | 'ar' }) {
   const isAr = lang === 'ar';
 
   return (
-    <section className="border-y border-[#C97B4A]/15 bg-[#0C0806] py-10 overflow-hidden relative z-10">
+    <section className="border-y border-[#D6B278]/15 bg-[#090C10] py-10 overflow-hidden relative z-10">
       <div className="max-w-7xl mx-auto px-6">
-        <span className="block text-center text-[10px] uppercase tracking-[0.35em] text-[#C97B4A] font-mono mb-8">
-          {isAr ? 'علامات تجارية وثقت برؤيتنا' : 'Trusted by Visionary Regional Brands'}
+        <span className="block text-center text-[10px] uppercase tracking-[0.35em] text-[#D6B278] font-mono mb-8">
+          {isAr ? 'علامات تجارية وثقت برؤيتنا' : 'Trusted by Regional Brands & Enterprises'}
         </span>
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-75 hover:opacity-100 transition duration-300">
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-75 hover:opacity-100 transition-opacity duration-300">
           {logos.map((file, idx) => (
-            <div key={idx} className="h-10 w-24 flex items-center justify-center grayscale contrast-125 hover:grayscale-0 transition duration-300">
+            <div key={idx} className="h-10 w-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
               <img
                 src={`/images/logos/${file}`}
                 alt="Brand Partner"

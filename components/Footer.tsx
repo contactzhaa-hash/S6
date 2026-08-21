@@ -19,7 +19,7 @@ export default function Footer({ lang }: { lang: 'en' | 'ar' }) {
       </div>
 
       <div className="text-[10px] text-[#94A3B8]/70 tracking-[0.3em] font-mono">
-        © {new Date().getFullYear()} S6 MEDIA BOUTIQUE. ALL RIGHTS RESERVED.
+        © 2026 S6 MEDIA BOUTIQUE. ALL RIGHTS RESERVED.
       </div>
     </footer>
   );

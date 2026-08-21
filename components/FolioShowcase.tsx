@@ -98,7 +98,6 @@ export default function FolioShowcase({ lang, onSelectWork }: FolioProps) {
           </h2>
         </div>
 
-        {/* Tab Filters */}
         <div className="flex flex-wrap gap-2 p-1.5 bg-[#0E1116] border border-[#D6B278]/20 rounded-md">
           {folders.map(f => (
             <button
@@ -116,7 +115,6 @@ export default function FolioShowcase({ lang, onSelectWork }: FolioProps) {
         </div>
       </div>
 
-      {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         {filtered.map((item, idx) => (
           <div
