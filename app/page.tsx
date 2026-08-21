@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import BrandMarquee from '../components/BrandMarquee';
-import ServiceMatrix from '../components/ServiceMatrix';
 import FolioShowcase from '../components/FolioShowcase';
+import ServiceMatrix from '../components/ServiceMatrix';
 import CommissionDrawer from '../components/CommissionDrawer';
 import Footer from '../components/Footer';
 
@@ -18,48 +18,44 @@ export default function Home() {
   return (
     <main
       dir={isRtl ? 'rtl' : 'ltr'}
-      className="min-h-screen bg-[#070503] text-[#F4ECE1] selection:bg-[#C97B4A] selection:text-black overflow-x-hidden font-sans"
+      className="min-h-screen bg-[#050709] text-[#F1F5F9] selection:bg-[#D6B278] selection:text-black overflow-x-hidden font-sans antialiased"
     >
-      {/* Ambient Lighting */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[650px] bg-[radial-gradient(ellipse_at_top,_rgba(201,123,74,0.13),transparent_70%)] pointer-events-none z-0" />
+      {/* Animated Aurora Ambient Glow */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[radial-gradient(ellipse_at_center,_rgba(214,178,120,0.12),transparent_65%)] blur-3xl animate-pulse" />
+        <div className="absolute top-[40%] right-[-10%] w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.05),transparent_70%)] blur-3xl" />
+      </div>
 
-      {/* Navigation */}
       <Navbar 
         lang={lang} 
         setLang={setLang} 
         onOpenDrawer={() => setDrawerOpen(true)} 
       />
 
-      {/* Hero Section */}
       <Hero 
         lang={lang} 
         onOpenDrawer={() => setDrawerOpen(true)} 
       />
 
-      {/* Brand Proof Strip */}
       <BrandMarquee 
         lang={lang} 
       />
 
-      {/* Interactive Folio Showcase */}
       <FolioShowcase 
         lang={lang} 
         onSelectWork={() => setDrawerOpen(true)} 
       />
 
-      {/* 4 Pillars: Photography, Print, Video, Strategy */}
       <ServiceMatrix 
         lang={lang} 
       />
 
-      {/* Commission Slide-out Drawer */}
       <CommissionDrawer 
         lang={lang} 
         isOpen={drawerOpen} 
         onClose={() => setDrawerOpen(false)} 
       />
 
-      {/* Editorial Footer */}
       <Footer 
         lang={lang} 
       />
